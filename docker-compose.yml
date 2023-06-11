@@ -5,7 +5,7 @@ services:
   item-app:
 
     # use image from gesangwibawono/item-app:1
-    image: gesangwibawono/item-app:v1
+    image: ghcr.io/gesangwibawono1/item-app:v1
 
     # set policy restart to be always
     restart: always
@@ -23,6 +23,9 @@ services:
 
     # use image from mongo:3
     image: mongo:3
+
+    # set policy restart to be always
+    restart: always
 
     # set volume mongo to app-db
     volumes:

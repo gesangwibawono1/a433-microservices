@@ -7,10 +7,10 @@ docker build -t item-app:v1 .
 docker images
 
 # rename repository
-docker item-app:v1 gesangwibawono/item-app:v1
+docker tag item-app:v1 ghcr.io/gesangwibawono1/item-app:v1
 
 # login docker hub
-echo $PASSWORD_DOCKER_HUB | docker login -u gesangwibawono --password-stdin
+echo $GHCR_PAT | docker login ghcr.io -u gesangwibawono1 --password-stdin
 
 # push image to docker hub
-docker push gesangwibawono/item-app:v1
+docker push ghcr.io/gesangwibawono1/item-app:v1

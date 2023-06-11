@@ -1,0 +1,2 @@
+https://hub.docker.com/r/gesangwibawono/item-app/tags
+https://github.com/users/gesangwibawono1/packages/container/package/item-app
