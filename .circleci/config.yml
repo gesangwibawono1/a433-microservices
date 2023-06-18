@@ -37,3 +37,4 @@ workflows:
       - print-env
       - print-ls
       - print-docker
+      - login-docker
