@@ -30,3 +30,4 @@ workflows:
     jobs:
       - print-env
       - print-ls
+      - print-docker
