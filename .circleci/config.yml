@@ -3,6 +3,13 @@ orbs:
   go: circleci/go@1.7.3
 
 jobs:
+  lint-dockerfile:
+    executor: docker-publisher
+    steps:
+      - checkout
+      - run:
+          name: Lint Dockerfile
+          command: docker run --rm --interactive hadolint/hadolint < Dockerfile
   test-app:
     executor:
       name: go/default
@@ -22,5 +29,6 @@ jobs:
 workflows:
   print-env-workflow:
     jobs:
+      - lint-dockerfile
       - test-app
       - login-docker
