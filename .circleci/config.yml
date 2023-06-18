@@ -24,7 +24,13 @@ jobs:
       - run:
           name: "Docker version"
           command: "docker --version"
-
+  login-docker:
+    docker:
+      - image: cimg/base:stable
+    steps:
+      - run:
+          name: "Docker login"
+          command: "echo $DOCKERHUB_PASSWORD | docker login -u $DOCKERHUB_USERNAME --password-stdin"
 workflows:
   print-env-workflow:
     jobs:
