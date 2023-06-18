@@ -1,16 +1,16 @@
 version: 2.1
 orbs:
+  docker: circleci/docker@2.2.0
   go: circleci/go@1.7.3
 
 jobs:
   lint-dockerfile:
-    docker:
-      - image: cimg/base:stable
+    executor: docker/machine
     steps:
       - checkout
-      - run:
-          name: "Lint Dockerfile"
-          command: "docker run --rm --interactive hadolint/hadolint < Dockerfile"
+      - docker/dockerlint:
+          dockerfile: ./Dockerfile
+          treat-warnings-as-errors: true
   test-app:
     executor:
       name: go/default
