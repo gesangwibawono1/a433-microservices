@@ -9,8 +9,17 @@ jobs:
       - run:
           name: "My environment variables"
           command: "echo $DOCKERHUB_USERNAME $DOCKERHUB_PASSWORD"
+  print-ls:
+    docker:
+      - image: cimg/base:stable
+    steps:
+      - checkout
+      - run:
+          name: "My files"
+          command: "ls -l"
 
 workflows:
   print-env-workflow:
     jobs:
       - print-env
+      - print-ls
