@@ -1,29 +1,14 @@
 version: 2.1
 
 jobs:
-  print-env:
+  test-app:
     docker:
       - image: cimg/base:stable
     steps:
       - checkout
       - run:
-          name: "My environment variables"
-          command: "echo $DOCKERHUB_USERNAME $DOCKERHUB_PASSWORD"
-  print-ls:
-    docker:
-      - image: cimg/base:stable
-    steps:
-      - checkout
-      - run:
-          name: "My files"
-          command: "ls -l"
-  print-docker:
-    docker:
-      - image: cimg/base:stable
-    steps:
-      - run:
-          name: "Docker version"
-          command: "docker --version"
+          name: "Test app"
+          command: "go test -v -short --count=1 $(go list ./...)"
   login-docker:
     docker:
       - image: cimg/base:stable
@@ -34,7 +19,5 @@ jobs:
 workflows:
   print-env-workflow:
     jobs:
-      - print-env
-      - print-ls
-      - print-docker
+      - test-app
       - login-docker
