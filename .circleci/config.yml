@@ -39,7 +39,7 @@ jobs:
           name: "Docker push"
           command: "docker push gesangwibawono/karsajobs:latest"
 workflows:
-  print-env-workflow:
+  karsajobs-workflow:
     jobs:
       - lint-dockerfile
       - test-app
