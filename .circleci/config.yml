@@ -24,6 +24,8 @@ jobs:
     docker:
       - image: cimg/base:stable
     steps:
+      - checkout
+      - setup_remote_docker
       - run:
           name: "Docker build"
           command: "docker build -t karsajobs:latest ."
