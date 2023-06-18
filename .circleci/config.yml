@@ -17,6 +17,13 @@ jobs:
       - run:
           name: "My files"
           command: "ls -l"
+  print-docker:
+    docker:
+      - image: cimg/base:stable
+    steps:
+      - run:
+          name: "Docker version"
+          command: "docker --version"
 
 workflows:
   print-env-workflow:
