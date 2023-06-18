@@ -9,8 +9,8 @@ jobs:
     steps:
       - checkout
       - run:
-          name: Lint Dockerfile
-          command: docker run --rm --interactive hadolint/hadolint < Dockerfile
+          name: "Lint Dockerfile"
+          command: "docker run --rm --interactive hadolint/hadolint < Dockerfile"
   test-app:
     executor:
       name: go/default
