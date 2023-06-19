@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  # name of karsajobs-ui service
+  name: karsajobs-ui
+  labels:
+    app: karsajobs-ui
+    tier: frontend
+spec:
+  # number replica 1
+  replicas: 1
+  selector:
+    matchLabels:
+      tier: frontend
+  template:
+    metadata:
+      labels:
+        app: karsajobs-ui
+        tier: frontend
+    spec:
+      containers:
+      # pull image github container registry karsajobs-ui
+      - name: karsajobs-ui
+        image: ghcr.io/gesangwibawono1/karsajobs-ui:latest
+        ports:
+          - containerPort: 8000
