@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: Service
+metadata:
+  # name of mongo service
+  name: mongo
+spec:
+  ports:
+  # port container mongo
+  - port: 27017
+  selector:
+    # for statefulset with label app mongo
+    app: mongo
+  # headless service
+  clusterIP: None
