@@ -1,0 +1,33 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  # name of order deployment
+  name: order
+  labels:
+    app: order
+    tier: producer
+spec:
+  # number replica 1
+  replicas: 1
+  selector:
+    matchLabels:
+      tier: producer
+  template:
+    metadata:
+      labels:
+        app: order
+        tier: producer
+    spec:
+      containers:
+      # pull image github container registry order
+      - name: order
+        image: ghcr.io/gesangwibawono1/order:latest
+        ports:
+          - containerPort: 3000
+        env:
+          # set port
+          - name: PORT 
+            value: '3000'
+          # set rabbit host
+          - name: AMQP_URL
+            value: amqp://my-rabbitmq-headless:5672

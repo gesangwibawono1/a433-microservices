@@ -1,0 +1,33 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  # name of order deployment
+  name: shipping
+  labels:
+    app: shipping
+    tier: consumer
+spec:
+  # number replica 1
+  replicas: 1
+  selector:
+    matchLabels:
+      tier: consumer
+  template:
+    metadata:
+      labels:
+        app: shipping
+        tier: consumer
+    spec:
+      containers:
+      # pull image github container registry shipping
+      - name: shipping
+        image: ghcr.io/gesangwibawono1/shipping:latest
+        ports:
+          - containerPort: 3001
+        env:
+          # set port
+          - name: PORT 
+            value: '3001'
+          # set rabbit host
+          - name: AMQP_URL
+            value: rabbitmq
