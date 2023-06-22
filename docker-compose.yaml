@@ -1,0 +1,27 @@
+version: "3.7"
+
+services:
+
+  order:
+
+    # use image from ghcr.io/gesangwibawono1/order:latest
+    image: ghcr.io/gesangwibawono1/order:latest
+
+    # set policy restart to be always
+    restart: always
+
+    # set environment rabbit host
+    environment:
+      AMQP_URL: amqp://172.17.0.2:5672
+
+  shipping:
+
+    # use image from ghcr.io/gesangwibawono1/shipping:latest
+    image: ghcr.io/gesangwibawono1/shipping:latest
+
+    # set policy restart to be always
+    restart: always
+
+    # set environment rabbit host
+    environment:
+      AMQP_URL: amqp://172.17.0.2:5672
