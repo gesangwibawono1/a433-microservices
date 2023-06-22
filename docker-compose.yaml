@@ -10,9 +10,20 @@ services:
     # set policy restart to be always
     restart: always
 
-    # set environment rabbit host
+    # mapping port 3000 container to port 3000 host
+    ports:
+      - 3000:3000
+
+    # set environment for order container
     environment:
-      AMQP_URL: amqp://172.17.0.2:5672
+      # set environment for app port
+      PORT: 3000
+      # set environment for rabbit host
+      AMQP_URL: amqp://rabbitmq:5672
+    
+    # wait from rabbitmq service
+    depends_on:
+      - rabbitmq
 
   shipping:
 
@@ -22,6 +33,29 @@ services:
     # set policy restart to be always
     restart: always
 
-    # set environment rabbit host
+    # mapping port 3000 container to port 3000 host
+    ports:
+      - 3001:3001
+
+    # set environment for shipping container 
     environment:
-      AMQP_URL: amqp://172.17.0.2:5672
+      # set environment for app port
+      PORT: 3001
+      # set environment for rabbit host
+      AMQP_URL: amqp://rabbitmq:5672
+    
+    # wait from rabbitmq service
+    depends_on:
+      - rabbitmq
+
+  rabbitmq:
+
+    image: rabbitmq:3.11-management
+
+    # set policy restart to be always
+    restart: always
+
+    # mapping port 5672 container to port 5672 host and port 15672 container to port 15672 host
+    ports:
+      - 5672:5672
+      - 15672:15672
