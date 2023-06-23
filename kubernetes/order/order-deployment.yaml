@@ -1,33 +1,49 @@
+# use api version 1
 apiVersion: apps/v1
+# deployment object
 kind: Deployment
+# set metadata deployment
 metadata:
-  # name of order deployment
+  # name of deployment
   name: order
+  # label list of deployment
   labels:
+    # label with key app & value order
     app: order
+    # label with key tier & value producer
     tier: producer
 spec:
-  # number replica 1
+  # number replica pod : 1
   replicas: 1
+  # selector pod
   selector:
     matchLabels:
+      # label with key tier & value producer
       tier: producer
   template:
+    # metadata pod
     metadata:
+      # label list of pod
       labels:
+        # label with key app & value order
         app: order
+        # label with key tier & value producer
         tier: producer
     spec:
+      # container list of pod
       containers:
-      # pull image github container registry order
+      # name of container
       - name: order
+      # pull image github container registry order
         image: ghcr.io/gesangwibawono1/order:latest
+        # port list of container
         ports:
+          # set containter port 3000
           - containerPort: 3000
         env:
-          # set port
+          # set port with 3000
           - name: PORT 
             value: '3000'
-          # set rabbit host
+          # set rabbit host from rabbitmq service with username & password
           - name: AMQP_URL
-            value: amqp://my-rabbitmq-headless:5672
+            value: amqp://user:BHs2GXOloqb671C1@rabbitmq:5672
