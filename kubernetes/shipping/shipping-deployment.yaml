@@ -1,0 +1,49 @@
+# use api version 1
+apiVersion: apps/v1
+# deployment object
+kind: Deployment
+# set metadata deployment
+metadata:
+  # name of deployment
+  name: shipping
+  # label list of deployment
+  labels:
+    # label with key app & value shipping
+    app: shipping
+    # label with key tier & value consumer
+    tier: consumer
+spec:
+  # number replica pod : 1
+  replicas: 1
+  # selector pod
+  selector:
+    matchLabels:
+      # label with key tier & value consumer
+      tier: consumer
+  template:
+    # metadata pod
+    metadata:
+      # label list of pod
+      labels:
+        # label with key app & value shipping
+        app: shipping
+        # label with key tier & value consumer
+        tier: consumer
+    spec:
+      # container list of pod
+      containers:
+      # name of container
+      - name: shipping
+      # pull image github container registry shipping
+        image: ghcr.io/gesangwibawono1/shipping:latest
+        # port list of container
+        ports:
+          # set containter port 3001
+          - containerPort: 3001
+        env:
+          # set port with 3001
+          - name: PORT 
+            value: '3001'
+          # set rabbit host from rabbitmq service with username & password
+          - name: AMQP_URL
+            value: amqp://user:BHs2GXOloqb671C1@rabbitmq:5672
