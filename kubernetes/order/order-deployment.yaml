@@ -30,6 +30,8 @@ spec:
         # label with key tier & value producer
         tier: producer
     spec:
+      # service account name
+      serviceAccountName: order
       # container list of pod
       containers:
       # name of container
@@ -47,3 +49,7 @@ spec:
           # set rabbit host from rabbitmq service with username & password
           - name: AMQP_URL
             value: amqp://user:BHs2GXOloqb671C1@rabbitmq:5672
+        # security config
+        securityContext:
+          # user id
+          runAsUser: 1000

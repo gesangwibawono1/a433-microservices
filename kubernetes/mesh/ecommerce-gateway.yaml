@@ -1,0 +1,65 @@
+# use api version istio
+apiVersion: networking.istio.io/v1alpha3
+# object of gateway
+kind: Gateway
+# set metada of gateway
+metadata:
+  # name of gateway
+  name: ecommerce-gateway
+# set specification of gateway
+spec:
+  # selector of gateway
+  selector:
+    # use istio default controller
+    istio: ingressgateway
+  # server list of gateway
+  servers:
+  # port gateway
+  - port:
+      # port number
+      number: 80
+      # port name
+      name: http
+      # protocol type
+      protocol: HTTP
+    # host list
+    hosts:
+    # all
+    - "*"
+---
+# use api version istio
+apiVersion: networking.istio.io/v1alpha3
+# object of virtual service
+kind: VirtualService
+# set metadata
+metadata:
+  # name of virtual service
+  name: order
+# set specification virtual service
+spec:
+  # host list
+  hosts:
+  # all
+  - "*"
+  # gateway list
+  gateways:
+  # select gateway
+  - ecommerce-gateway
+  # http rule
+  http:
+  # pattern
+  - match:
+    # uri condition
+    - uri:
+        # exact with endpoint 
+        exact: /order
+    # redirect
+    route:
+    # set destination
+    - destination:
+        # host from order service account
+        host: order
+        # port definition
+        port:
+          # number port
+          number: 3000
